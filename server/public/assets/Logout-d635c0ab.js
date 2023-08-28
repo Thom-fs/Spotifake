@@ -1,0 +1,1 @@
+import{r as t,A as o,E as u,u as n,Q as r}from"./index-d7cf4f9b.js";function f(){const{logout:s}=t.useContext(o),{setCurrentMusic:e}=u(),a=n();t.useEffect(()=>{e(r),s(),a("/")},[])}export{f as default};

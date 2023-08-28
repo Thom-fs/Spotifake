@@ -1,0 +1,17 @@
+{
+  "name": "spotifake-jambon-beurre",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "cd ./client && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Le-Bocal-Academy/spotifake-jambon-beurre.git"
+  },
+  "author": "Thomas Schneider",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Le-Bocal-Academy/spotifake-jambon-beurre/issues"
+  },
+  "homepage": "https://github.com/Le-Bocal-Academy/spotifake-jambon-beurre#readme"
+}

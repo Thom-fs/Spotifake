@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind forms;
+@tailwind typography;
+@tailwind aspect-ratio;
+
+body {
+  margin: 0;
+  padding: 0;
+  background: rgb(27, 36, 48);
+  color: white;
+  font-family: 'Roboto', sans-serif;
+}

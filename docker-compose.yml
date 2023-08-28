@@ -1,0 +1,59 @@
+version: "3.8"
+
+services:
+  mysql_DB:
+    container_name: mysql_DB
+    image: mysql:latest
+    env_file:
+      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+    ports: 
+      - 3306:3306
+    networks:
+      - app-network
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
+    env_file:
+      - .env
+    links:
+      - mysql_DB:db
+    ports:
+      - 8081:80
+    environment:
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      PMA_HOST: ${PMA_HOST}
+    networks:
+      - app-network
+
+  server:
+    container_name: server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    volumes:
+      - ./server:/var/www/app
+    ports:
+      - 8000:80
+    command: /bin/bash -c "sleep 10 && php artisan migrate && apachectl -D FOREGROUND && chmod -R 777 storage bootstrap/cache"
+    env_file:
+      - .env
+    networks:
+      - app-network
+    depends_on:
+      - mysql_DB
+
+volumes:
+  db_data:
+
+networks:
+  app-network:
+    driver: bridge
